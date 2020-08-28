@@ -1,2 +1,14 @@
-<h1>Users#my_portfolio</h1>
-<p>Find me in app/views/users/my_portfolio.html.erb</p>
+<h1>My portfolio</h1>
+
+<h3>Search Stocks</h3>
+<%= form_tag search_stock_path, method: :get do%>
+<%=text_field_tag :stock, params[:stocks],placeholder: "stock ticker symbol",autofocus: true%>
+<%=button_tag type: :submit  do%>
+<%="search"%>
+<%end%>
+<%end%>
+<%if @stock%>
+<strong>Symbol: </strong><%=@stock.ticker %><br>
+<strong>NAME: </strong><%=@stock.name %><br>
+<strong>price: </strong><%=@stock.last_price %>
+<%end%>
