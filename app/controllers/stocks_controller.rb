@@ -19,4 +19,12 @@ class StocksController <ApplicationController
       end 
     end
    end
+  
+   def update
+    stock=Stock.find_by(id: params[:id])
+    p=Stock.new_lookup(stock[:ticker])
+    stock.last_price=p.last_price
+    stock.save
+    #render partial: 'stocks/row'
+   end  
 end
