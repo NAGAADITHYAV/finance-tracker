@@ -1,3 +1,7 @@
+<%= link_to "FINANCE TRACKER",root_path%>
+
+<%= link_to 'Sign out', destroy_user_session_path,method: :delete%>
+
 <h1>My portfolio</h1>
 
 <h3>Search Stocks</h3>
@@ -10,3 +14,7 @@
 <div id ="results">
 
 </div>
+
+<% if !@tracked_stocks.empty?%>
+<%= render 'stocks/list'%>
+<%end%>

@@ -2,5 +2,6 @@
 <%if @stock%>
 <strong>Symbol: </strong><%=@stock.ticker %><br>
 <strong>NAME: </strong><%=@stock.name %><br>
-<strong>price: </strong><%=@stock.last_price %>
+<strong>price: </strong><%=@stock.last_price %><br>
+<%= link_to "ADD TO track",user_stocks_path(user: current_user,ticker: @stock.ticker),method: :post%>
 <%end%>
