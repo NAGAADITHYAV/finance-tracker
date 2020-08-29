@@ -1,7 +1,20 @@
 <p class ="alert"><%=alert%></p>
-<%if @stock%>
-<strong>Symbol: </strong><%=@stock.ticker %><br>
-<strong>NAME: </strong><%=@stock.name %><br>
-<strong>price: </strong><%=@stock.last_price %><br>
-<%= link_to "ADD TO track",user_stocks_path(user: current_user,ticker: @stock.ticker),method: :post%>
-<%end%>
+<% if @stock %>
+    <strong>Symbol: </strong> <%= @stock.ticker %><br>
+    <strong>Name: </strong> <%= @stock.name %><br>
+    <strong>Price: </strong> <%= @stock.last_price %><br>
+    <% if current_user.can_track_stock?(@stock.ticker) %>
+      <%= link_to 'Add to portfolio', user_stocks_path(user: current_user, ticker: @stock.ticker),
+                                    class: "btn btn-sm btn-success", method: :post %>
+    <% else %>
+      <span class="badge badge-secondary">
+        You are already tracking
+        <% if !current_user.under_stock_limit? %>
+          10 stocks
+        <% end %>
+        <% if current_user.stock_already_tracked?(@stock.ticker) %>
+          this stock
+        <% end %>
+      </span>
+    <% end %>
+<% end %>
